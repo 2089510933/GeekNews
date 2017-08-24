@@ -14,4 +14,13 @@ public interface MainContract {
 
         void startDownloadService();
     }
+
+    public interface Presenter {
+        //检查版本
+        void checkVersion(String currentVersion);
+        //得到版本点
+        boolean getVersionPoint();
+        //设置版本点
+        void setVersionPoint(boolean b);
+    }
 }

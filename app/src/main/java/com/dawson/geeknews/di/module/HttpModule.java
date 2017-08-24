@@ -1,7 +1,8 @@
 package com.dawson.geeknews.di.module;
 
+import com.dawson.geeknews.di.qualifier.MyUrl;
 import com.dawson.geeknews.di.qualifier.ZhihuUrl;
-import com.dawson.geeknews.model.http.StringConverterFactory;
+import com.dawson.geeknews.model.http.api.MyApis;
 import com.dawson.geeknews.model.http.api.ZhihuApis;
 
 import java.util.concurrent.TimeUnit;
@@ -67,6 +68,17 @@ public class HttpModule {
 
 
     /**=======================================================*/
+    @Singleton
+    @Provides
+    MyApis provideMyService(@MyUrl Retrofit retrofit) {
+        return retrofit.create(MyApis.class);
+    }
+    @Singleton
+    @Provides
+    @MyUrl
+    Retrofit provideMyRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, MyApis.HOST);
+    }
     //用Retorfit创建ZhihuApis的网络请求实列
     @Singleton
     @Provides

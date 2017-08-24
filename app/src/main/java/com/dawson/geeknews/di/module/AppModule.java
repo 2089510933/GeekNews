@@ -4,6 +4,8 @@ import com.dawson.geeknews.app.App;
 import com.dawson.geeknews.model.DataManager;
 import com.dawson.geeknews.model.http.HttpHelper;
 import com.dawson.geeknews.model.http.RetrofitHelper;
+import com.dawson.geeknews.model.prefs.ImplPreferencesHelper;
+import com.dawson.geeknews.model.prefs.PreferencesHelper;
 
 import javax.inject.Singleton;
 
@@ -34,10 +36,14 @@ public class AppModule {
         return retrofitHelper;
     }
 
-
     @Provides
     @Singleton
-    DataManager provideDataManager(HttpHelper httpHelper) {
-        return new DataManager(httpHelper);
+    PreferencesHelper providePreferencesHelper(ImplPreferencesHelper implPreferencesHelper) {
+        return implPreferencesHelper;
+    }
+    @Provides
+    @Singleton
+    DataManager provideDataManager(HttpHelper httpHelper,PreferencesHelper preferencesHelper) {
+        return new DataManager(httpHelper,preferencesHelper);
     }
 }

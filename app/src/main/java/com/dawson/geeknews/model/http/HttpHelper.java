@@ -1,6 +1,8 @@
 package com.dawson.geeknews.model.http;
 
 import com.dawson.geeknews.model.WelcomeBean;
+import com.dawson.geeknews.model.base.VersionBean;
+import com.dawson.geeknews.model.http.response.MyHttpResponse;
 
 import io.reactivex.Flowable;
 
@@ -12,4 +14,6 @@ import io.reactivex.Flowable;
 public interface HttpHelper {
 
     Flowable<WelcomeBean> fetchWelcomeInfo(String res);
+
+    Flowable<MyHttpResponse<VersionBean>> fetchVersionInfo();
 }

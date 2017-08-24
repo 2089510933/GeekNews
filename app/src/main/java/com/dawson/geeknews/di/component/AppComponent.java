@@ -5,6 +5,7 @@ import com.dawson.geeknews.di.module.AppModule;
 import com.dawson.geeknews.di.module.HttpModule;
 import com.dawson.geeknews.model.DataManager;
 import com.dawson.geeknews.model.http.HttpHelper;
+import com.dawson.geeknews.model.prefs.ImplPreferencesHelper;
 
 import javax.inject.Singleton;
 
@@ -20,4 +21,5 @@ public interface AppComponent {
     App getContext();  // 提供App的Context
     DataManager getDataManager(); //数据中心
     HttpHelper retrofitHelper(); //数据中心
+    ImplPreferencesHelper preferencesHelper(); //提供sp帮助类
 }
