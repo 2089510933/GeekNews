@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.dawson.geeknews.ui.main.activity.MainActivity">
+    android:background="@color/colorPrimaryDark">
 
-    <ImageView
-        android:id="@+id/iv_welcome_bg"
+    <android.support.v4.widget.DrawerLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_welcome_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="10dp"
-        android:text="未知版本"
-        android:textColor="@color/colorAccent"
-        android:textSize="14sp" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/view_toolbar" />
 
-</FrameLayout>
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/drawer_item_bg_n"
+            app:headerLayout="@layout/view_drawer_header"
+            app:itemBackground="@drawable/drawer_item_bg"
+            app:menu="@menu/drawer_menu">
+
+        </android.support.design.widget.NavigationView>
+    </android.support.v4.widget.DrawerLayout>
+
+
+</RelativeLayout>

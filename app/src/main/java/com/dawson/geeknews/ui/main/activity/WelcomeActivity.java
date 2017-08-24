@@ -1,15 +1,26 @@
 package com.dawson.geeknews.ui.main.activity;
 
+import android.content.Intent;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dawson.geeknews.R;
 import com.dawson.geeknews.base.BaseActivity;
 import com.dawson.geeknews.base.main.WelcomeContract;
+import com.dawson.geeknews.component.ImageLoader;
 import com.dawson.geeknews.model.WelcomeBean;
 import com.dawson.geeknews.presenter.main.WelcomePresenter;
 
+import butterknife.BindView;
+
 
 public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements WelcomeContract.View {
+
+    @BindView(R.id.iv_welcome_bg)
+    ImageView ivWelcomeBg;
+    @BindView(R.id.tv_welcome_author)
+    TextView tvWelcomeAuthor;
 
     @Override
     protected void initInject() {
@@ -18,7 +29,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_welcome;
     }
 
     @Override
@@ -33,8 +44,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
      */
     @Override
     public void showContent(WelcomeBean welcomeBean) {
-
         Log.e(">>","showContent()");
+        ImageLoader.load(this, welcomeBean.getImg(), ivWelcomeBg);
+        ivWelcomeBg.animate().scaleX(1.12f).scaleY(1.12f).setDuration(2000).setStartDelay(100).start();
+        tvWelcomeAuthor.setText(welcomeBean.getText());
     }
 
     /**
@@ -42,7 +55,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
      */
     @Override
     public void jumpToMain() {
-
         Log.e(">>","jumpToMain()");
+        Intent intent = new Intent();
+        intent.setClass(this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

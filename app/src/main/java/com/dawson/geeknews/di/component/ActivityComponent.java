@@ -2,6 +2,7 @@ package com.dawson.geeknews.di.component;
 
 import com.dawson.geeknews.di.module.ActivityModule;
 import com.dawson.geeknews.di.scope.ActivityScope;
+import com.dawson.geeknews.ui.main.activity.MainActivity;
 import com.dawson.geeknews.ui.main.activity.WelcomeActivity;
 
 import dagger.Component;
@@ -17,4 +18,6 @@ import dagger.Component;
 public interface ActivityComponent {
 
     void inject(WelcomeActivity welcomeActivity);
+
+    void inject(MainActivity mainActivity);
 }
