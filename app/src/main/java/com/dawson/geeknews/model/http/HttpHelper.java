@@ -16,4 +16,6 @@ public interface HttpHelper {
     Flowable<WelcomeBean> fetchWelcomeInfo(String res);
 
     Flowable<MyHttpResponse<VersionBean>> fetchVersionInfo();
+
+//    Flowable<VersionFir> fetchFirVersionInfo();
 }

@@ -46,4 +46,9 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     public Flowable<MyHttpResponse<VersionBean>> fetchVersionInfo() {
         return mHttpHelper.fetchVersionInfo();
     }
+
+//    @Override
+//    public Flowable<VersionFir> fetchFirVersionInfo() {
+//        return mHttpHelper.fetchFirVersionInfo();
+//    }
 }

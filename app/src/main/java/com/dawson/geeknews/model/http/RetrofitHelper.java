@@ -27,7 +27,7 @@ public class RetrofitHelper implements HttpHelper {
     @Inject
     public RetrofitHelper(ZhihuApis mZhihuApiService,MyApis myApiService) {
         this.mZhihuApiService = mZhihuApiService;
-        myApiService = myApiService;
+        this.mMyApiService = myApiService;
     }
 
 
@@ -41,4 +41,12 @@ public class RetrofitHelper implements HttpHelper {
     public Flowable<MyHttpResponse<VersionBean>> fetchVersionInfo() {
         return mMyApiService.getVersionInfo();
     }
+
+//    @Override
+//    public Flowable<VersionFir> fetchFirVersionInfo() {
+//
+//        return mMyApiService.getFirVersionInfo();
+//    }
+
+
 }

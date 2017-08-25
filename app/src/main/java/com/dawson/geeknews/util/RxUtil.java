@@ -58,6 +58,25 @@ public class RxUtil {
             }
         };
     }
+/*    *//**
+     * 统一返回结果处理
+     * @param <T>
+     * @return
+     *//*
+    public static <T> FlowableTransformer<VersionFir, T> handleMyResultFir() {   //compose判断结果
+        return new FlowableTransformer<VersionFir, T>() {
+            @Override
+            public Flowable<T> apply(Flowable<VersionFir> httpResponseFlowable) {
+                return httpResponseFlowable.flatMap(new Function<VersionFir, Flowable<T>>() {
+                    @Override
+                    public Flowable<T> apply(VersionFir versionFir) {
+                            return Flowable.error(new ApiException("124", 400));
+                    }
+                });
+            }
+        };
+    }*/
+
     /**
      * 生成Flowable
      * @param <T>
