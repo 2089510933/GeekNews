@@ -1,14 +1,14 @@
 package com.dawson.geeknews.model.http;
 
 import com.dawson.geeknews.model.WelcomeBean;
-import com.dawson.geeknews.model.base.VersionBean;
+import com.dawson.geeknews.model.base.VersionFir;
 import com.dawson.geeknews.model.http.api.MyApis;
 import com.dawson.geeknews.model.http.api.ZhihuApis;
-import com.dawson.geeknews.model.http.response.MyHttpResponse;
 
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import retrofit2.Call;
 
 /**
  * 作者：Administrator on 2017/8/23 18:00
@@ -37,16 +37,17 @@ public class RetrofitHelper implements HttpHelper {
         return mZhihuApiService.getWelcomeInfo(res);
     }
 
+
+
     @Override
-    public Flowable<MyHttpResponse<VersionBean>> fetchVersionInfo() {
-        return mMyApiService.getVersionInfo();
+    public Flowable<VersionFir> fetchFirVersionInfo(String api_token) {
+        return mMyApiService.getFirVersionInfo(api_token);
     }
 
-//    @Override
-//    public Flowable<VersionFir> fetchFirVersionInfo() {
-//
-//        return mMyApiService.getFirVersionInfo();
-//    }
+    @Override
+    public Call<VersionFir> fetchFirVersionInfoCall(String api_token) {
+        return mMyApiService.getFirVersionInfoCall(api_token);
+    }
 
 
 }

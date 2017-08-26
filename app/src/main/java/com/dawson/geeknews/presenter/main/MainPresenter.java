@@ -1,5 +1,7 @@
 package com.dawson.geeknews.presenter.main;
 
+import android.util.Log;
+
 import com.dawson.geeknews.base.RxPresenter;
 import com.dawson.geeknews.base.main.MainContract;
 import com.dawson.geeknews.model.DataManager;
@@ -13,7 +15,7 @@ import io.reactivex.disposables.Disposable;
  * 邮箱：zhangxxx_java@163.com
  */
 
-public class MainPresenter extends RxPresenter<MainContract.View> {
+public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter{
     private DataManager mDataManager;
 
     @Inject
@@ -34,10 +36,59 @@ public class MainPresenter extends RxPresenter<MainContract.View> {
     @Override
     public void attachView(MainContract.View view) {
         super.attachView(view);
+        registerEvent();//注册活动
+    }
+
+    private void registerEvent() {
     }
 
     @Override
     public void detachView() {
         super.detachView();
+    }
+
+    @Override
+    public void checkVersion(final String currentVersion) {
+        Log.e("","checkVersion()");
+      /*addSubscribe(mDataManager.fetchFirVersionInfo()
+                .compose(RxUtil.<VersionFir>rxSchedulerHelper())
+//                .compose(RxUtil.<VersionFir>handleMyResultFir())
+                .filter(new Predicate<VersionFir>() {
+                    @Override
+                    public boolean test(@NonNull VersionFir versionBean) throws Exception {
+                        return Integer.valueOf(currentVersion.replace(".", "")) < Integer.valueOf(versionBean.getVersion().replace(".", ""));
+                    }
+                })
+                .map(new Function<VersionFir, String>() {
+                    @Override
+                    public String apply(VersionFir bean) {
+                        StringBuilder content = new StringBuilder("版本号: v");
+                        content.append(bean.getVersion());
+                        content.append("\r\n");
+                        content.append("版本大小: ");
+                        content.append(bean.getBinary());
+                        content.append("\r\n");
+                        content.append("更新内容:\r\n");
+                        content.append(bean.getChangelog().replace("\\r\\n","\r\n"));
+                        return content.toString();
+                    }
+                })
+                .subscribeWith(new CommonSubscriber<String>(mView) {
+                    @Override
+                    public void onNext(String s) {
+                        mView.showUpdateDialog(s);
+                    }
+                })
+        );*/
+    }
+
+    @Override
+    public boolean getVersionPoint() {
+        return mDataManager.getVersionPoint();
+    }
+
+    @Override
+    public void setVersionPoint(boolean b) {
+        mDataManager.setVersionPoint(b);
     }
 }

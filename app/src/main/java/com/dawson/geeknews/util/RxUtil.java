@@ -17,6 +17,8 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * 作者：Administrator on 2017/8/24 09:33
  * 邮箱：zhangxxx_java@163.com
+ *
+ * Observable/Flowable操作符处理
  */
 
 public class RxUtil {
@@ -58,24 +60,6 @@ public class RxUtil {
             }
         };
     }
-/*    *//**
-     * 统一返回结果处理
-     * @param <T>
-     * @return
-     *//*
-    public static <T> FlowableTransformer<VersionFir, T> handleMyResultFir() {   //compose判断结果
-        return new FlowableTransformer<VersionFir, T>() {
-            @Override
-            public Flowable<T> apply(Flowable<VersionFir> httpResponseFlowable) {
-                return httpResponseFlowable.flatMap(new Function<VersionFir, Flowable<T>>() {
-                    @Override
-                    public Flowable<T> apply(VersionFir versionFir) {
-                            return Flowable.error(new ApiException("124", 400));
-                    }
-                });
-            }
-        };
-    }*/
 
     /**
      * 生成Flowable

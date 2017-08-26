@@ -25,6 +25,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpModule {
 
 
+    @Singleton
+    @Provides
+    Retrofit.Builder provideRetrofitBuilder() {
+        return new Retrofit.Builder();
+    }
+
 
     @Singleton
     @Provides
@@ -32,21 +38,7 @@ public class HttpModule {
         return new OkHttpClient.Builder();
     }
 
-    /**
-     * 创建Retrofit2网络请求基类
-     * @param builder
-     * @param client
-     * @param url
-     * @return
-     */
-    private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {
-        return builder
-                .baseUrl(url)
-                .client(client)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-    }
+
     @Singleton
     @Provides
     OkHttpClient provideClient(OkHttpClient.Builder builder) {
@@ -66,19 +58,39 @@ public class HttpModule {
         return builder.build();
     }
 
+    /**
+     * 创建Retrofit2网络请求基类
+     *
+     * @param builder
+     * @param client
+     * @param url
+     * @return
+     */
+    private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {
+        return builder
+                .baseUrl(url)//当请求的一个完整的网络接口时，baseUrl这里只是传入根路径
+                .client(client)//传入OkHttpClient网络请求
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//添加rxjava转换器
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
 
-    /**=======================================================*/
+    /**
+     * =======================================================
+     */
     @Singleton
     @Provides
     MyApis provideMyService(@MyUrl Retrofit retrofit) {
         return retrofit.create(MyApis.class);
     }
+
     @Singleton
     @Provides
     @MyUrl
     Retrofit provideMyRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, MyApis.HOST);
     }
+
     //用Retorfit创建ZhihuApis的网络请求实列
     @Singleton
     @Provides
@@ -93,11 +105,5 @@ public class HttpModule {
     @Provides
     ZhihuApis provideZhihuService(@ZhihuUrl Retrofit retrofit) {
         return retrofit.create(ZhihuApis.class);
-    }
-
-    @Singleton
-    @Provides
-    Retrofit.Builder provideRetrofitBuilder() {
-        return new Retrofit.Builder();
     }
 }

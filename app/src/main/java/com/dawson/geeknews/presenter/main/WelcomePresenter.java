@@ -30,8 +30,7 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
     public void getWelcomeData() {
         //添加订阅
         addSubscribe(mDataManager.fetchWelcomeInfo(RES)
-                //定制类型转换
-                .compose(RxUtil.<WelcomeBean>rxSchedulerHelper())
+                .compose(RxUtil.<WelcomeBean>rxSchedulerHelper())//定制类型转换
                 .subscribe(getConsumeWelcomeBean(), getConsumeThrowable()));
 
     }

@@ -1,10 +1,10 @@
 package com.dawson.geeknews.model.http;
 
 import com.dawson.geeknews.model.WelcomeBean;
-import com.dawson.geeknews.model.base.VersionBean;
-import com.dawson.geeknews.model.http.response.MyHttpResponse;
+import com.dawson.geeknews.model.base.VersionFir;
 
 import io.reactivex.Flowable;
+import retrofit2.Call;
 
 /**
  * 作者：Administrator on 2017/8/23 17:43
@@ -14,8 +14,6 @@ import io.reactivex.Flowable;
 public interface HttpHelper {
 
     Flowable<WelcomeBean> fetchWelcomeInfo(String res);
-
-    Flowable<MyHttpResponse<VersionBean>> fetchVersionInfo();
-
-//    Flowable<VersionFir> fetchFirVersionInfo();
+    Flowable<VersionFir> fetchFirVersionInfo(String api_token);
+    Call<VersionFir> fetchFirVersionInfoCall(String api_token);
 }

@@ -1,12 +1,12 @@
 package com.dawson.geeknews.model;
 
 
-import com.dawson.geeknews.model.base.VersionBean;
+import com.dawson.geeknews.model.base.VersionFir;
 import com.dawson.geeknews.model.http.HttpHelper;
-import com.dawson.geeknews.model.http.response.MyHttpResponse;
 import com.dawson.geeknews.model.prefs.PreferencesHelper;
 
 import io.reactivex.Flowable;
+import retrofit2.Call;
 
 /**
  * 作者：Administrator on 2017/8/23 17:02
@@ -43,12 +43,12 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<MyHttpResponse<VersionBean>> fetchVersionInfo() {
-        return mHttpHelper.fetchVersionInfo();
+    public Flowable<VersionFir> fetchFirVersionInfo(String api_token) {
+        return mHttpHelper.fetchFirVersionInfo(api_token);
     }
 
-//    @Override
-//    public Flowable<VersionFir> fetchFirVersionInfo() {
-//        return mHttpHelper.fetchFirVersionInfo();
-//    }
+    @Override
+    public Call<VersionFir> fetchFirVersionInfoCall(String api_token) {
+        return mHttpHelper.fetchFirVersionInfoCall(api_token);
+    }
 }

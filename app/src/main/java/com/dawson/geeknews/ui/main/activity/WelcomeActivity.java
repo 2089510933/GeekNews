@@ -1,7 +1,6 @@
 package com.dawson.geeknews.ui.main.activity;
 
 import android.content.Intent;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,11 +39,12 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
 
     /**
      * 显示内容
+     *
      * @param welcomeBean
      */
     @Override
     public void showContent(WelcomeBean welcomeBean) {
-        Log.e(">>","showContent()");
+        //Log.e(">>","showContent()");
         ImageLoader.load(this, welcomeBean.getImg(), ivWelcomeBg);
         ivWelcomeBg.animate().scaleX(1.12f).scaleY(1.12f).setDuration(2000).setStartDelay(100).start();
         tvWelcomeAuthor.setText(welcomeBean.getText());
@@ -55,9 +55,9 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
      */
     @Override
     public void jumpToMain() {
-        Log.e(">>","jumpToMain()");
+        //Log.e(">>","jumpToMain()");
         Intent intent = new Intent();
-        intent.setClass(this,MainActivity.class);
+        intent.setClass(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

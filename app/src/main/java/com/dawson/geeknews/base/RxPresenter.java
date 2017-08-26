@@ -12,7 +12,7 @@ import io.reactivex.disposables.Disposable;
 
 public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     protected T mView;
-
+    //Disposable资源管理器
     protected CompositeDisposable mCompositeDisposable;
 
     /**
