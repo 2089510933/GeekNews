@@ -1,14 +1,17 @@
 package com.dawson.geeknews.presenter.main;
 
+import android.Manifest;
 import android.util.Log;
 
 import com.dawson.geeknews.base.RxPresenter;
-import com.dawson.geeknews.base.main.MainContract;
+import com.dawson.geeknews.base.contract.main.MainContract;
 import com.dawson.geeknews.model.DataManager;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * 作者：Administrator on 2017/8/24 16:00
@@ -90,5 +93,21 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     @Override
     public void setVersionPoint(boolean b) {
         mDataManager.setVersionPoint(b);
+    }
+
+    @Override
+    public void checkPermissions(RxPermissions rxPermissions) {
+        addSubscribe(rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean granted) {
+                        if (granted) {
+                            mView.startDownloadService();
+                        } else {
+                            mView.showErrorMsg("下载应用需要文件写入权限哦~");
+                        }
+                    }
+                })
+        );
     }
 }

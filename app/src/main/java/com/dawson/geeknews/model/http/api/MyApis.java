@@ -17,13 +17,16 @@ public interface MyApis {
 
     //    String HOST = "http://api.fir.im/apps/latest/59a046b9ca87a81949000129?api_token=1b4fa24326017c903c9faa50dc00ef9d/";
     String HOST = "http://api.fir.im/apps/latest/";
+    String APK_DOWNLOAD_URL = "";
 
     /**
      * 获取最新版本信息
+     *
      * @return
      */
     @GET("59a046b9ca87a81949000129")
     Flowable<VersionFir> getFirVersionInfo(@Query("api_token") String api_token);
+
     @GET("59a046b9ca87a81949000129")
     Call<VersionFir> getFirVersionInfoCall(@Query("api_token") String api_token);
 

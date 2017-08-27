@@ -20,7 +20,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  * 继承fragmentation框架的SupportActivity，便于activity生命周期管理
  */
 public abstract class SimpleActivity extends SupportActivity {
-    private Activity mContext;
+    protected Activity mContext;
     private Unbinder mUnBinder;
 
     @Override

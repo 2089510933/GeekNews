@@ -2,8 +2,13 @@ package com.dawson.geeknews.model;
 
 
 import com.dawson.geeknews.model.base.VersionFir;
+import com.dawson.geeknews.model.base.WXItemBean;
+import com.dawson.geeknews.model.base.WelcomeBean;
 import com.dawson.geeknews.model.http.HttpHelper;
+import com.dawson.geeknews.model.http.response.WXHttpResponse;
 import com.dawson.geeknews.model.prefs.PreferencesHelper;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.Call;
@@ -43,6 +48,11 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
+    public boolean getNoImageState() {
+        return mPreferencesHelper.getNoImageState();
+    }
+
+    @Override
     public Flowable<VersionFir> fetchFirVersionInfo(String api_token) {
         return mHttpHelper.fetchFirVersionInfo(api_token);
     }
@@ -50,5 +60,10 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Call<VersionFir> fetchFirVersionInfoCall(String api_token) {
         return mHttpHelper.fetchFirVersionInfoCall(api_token);
+    }
+
+    @Override
+    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWechatListInfo(int num, int page) {
+        return mHttpHelper.fetchWechatListInfo(num,page);
     }
 }

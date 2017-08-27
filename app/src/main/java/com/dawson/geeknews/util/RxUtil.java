@@ -2,6 +2,7 @@ package com.dawson.geeknews.util;
 
 import com.dawson.geeknews.model.exception.ApiException;
 import com.dawson.geeknews.model.http.response.MyHttpResponse;
+import com.dawson.geeknews.model.http.response.WXHttpResponse;
 
 import org.reactivestreams.Publisher;
 
@@ -54,6 +55,29 @@ public class RxUtil {
                             return createData(tMyHttpResponse.getData());
                         } else {
                             return Flowable.error(new ApiException(tMyHttpResponse.getMessage(), tMyHttpResponse.getCode()));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    /**
+     * 统一返回结果处理
+     * @param <T>
+     * @return
+     */
+    public static <T> FlowableTransformer<WXHttpResponse<T>, T> handleWXResult() {   //compose判断结果
+        return new FlowableTransformer<WXHttpResponse<T>, T>() {
+            @Override
+            public Flowable<T> apply(Flowable<WXHttpResponse<T>> httpResponseFlowable) {
+                return httpResponseFlowable.flatMap(new Function<WXHttpResponse<T>, Flowable<T>>() {
+                    @Override
+                    public Flowable<T> apply(WXHttpResponse<T> tWXHttpResponse) {
+                        if(tWXHttpResponse.getCode() == 200) {
+                            return createData(tWXHttpResponse.getNewslist());
+                        } else {
+                            return Flowable.error(new ApiException(tWXHttpResponse.getMsg(), tWXHttpResponse.getCode()));
                         }
                     }
                 });

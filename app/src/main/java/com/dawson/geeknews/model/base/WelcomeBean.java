@@ -1,4 +1,4 @@
-package com.dawson.geeknews.model;
+package com.dawson.geeknews.model.base;
 
 /**
  * 作者：Administrator on 2017/8/23 11:55

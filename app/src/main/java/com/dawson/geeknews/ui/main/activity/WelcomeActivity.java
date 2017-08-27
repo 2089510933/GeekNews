@@ -6,9 +6,9 @@ import android.widget.TextView;
 
 import com.dawson.geeknews.R;
 import com.dawson.geeknews.base.BaseActivity;
-import com.dawson.geeknews.base.main.WelcomeContract;
+import com.dawson.geeknews.base.contract.main.WelcomeContract;
 import com.dawson.geeknews.component.ImageLoader;
-import com.dawson.geeknews.model.WelcomeBean;
+import com.dawson.geeknews.model.base.WelcomeBean;
 import com.dawson.geeknews.presenter.main.WelcomePresenter;
 
 import butterknife.BindView;

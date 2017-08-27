@@ -7,4 +7,5 @@ package com.dawson.geeknews.model.prefs;
 public interface PreferencesHelper {
     boolean getVersionPoint();
     void setVersionPoint(boolean isFirst);
+    boolean getNoImageState();
 }

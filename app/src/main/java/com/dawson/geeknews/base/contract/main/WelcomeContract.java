@@ -1,8 +1,8 @@
-package com.dawson.geeknews.base.main;
+package com.dawson.geeknews.base.contract.main;
 
 import com.dawson.geeknews.base.BasePresenter;
 import com.dawson.geeknews.base.BaseView;
-import com.dawson.geeknews.model.WelcomeBean;
+import com.dawson.geeknews.model.base.WelcomeBean;
 
 /**
  * 作者：Administrator on 2017/8/23 11:54

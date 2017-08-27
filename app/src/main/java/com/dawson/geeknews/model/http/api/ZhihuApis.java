@@ -1,6 +1,6 @@
 package com.dawson.geeknews.model.http.api;
 
-import com.dawson.geeknews.model.WelcomeBean;
+import com.dawson.geeknews.model.base.WelcomeBean;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;

@@ -1,6 +1,7 @@
-package com.dawson.geeknews.base.main;
+package com.dawson.geeknews.base.contract.main;
 
 import com.dawson.geeknews.base.BaseView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 /**
  * 作者：Administrator on 2017/8/24 16:01
@@ -22,5 +23,7 @@ public interface MainContract {
         boolean getVersionPoint();
         //设置版本点
         void setVersionPoint(boolean b);
+        //更新
+        void checkPermissions(RxPermissions rxPermissions);
     }
 }

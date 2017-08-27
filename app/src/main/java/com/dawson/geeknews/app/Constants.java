@@ -46,4 +46,8 @@ public class Constants {
     public static final String SP_VERSION_POINT = "version_point";
 
     public static final String SP_MANAGER_POINT = "manager_point";
+    //================= KEY ====================
+
+    //    public static final String KEY_API = "f95283476506aa756559dd28a56f0c0b"; //需要APIKEY请去 http://apistore.baidu.com/ 申请,复用会减少访问可用次数
+    public static final String KEY_API = "52b7ec3471ac3bec6846577e79f20e4c"; //需要APIKEY请去 http://www.tianapi.com/#wxnew 申请,复用会减少访问可用次数
 }

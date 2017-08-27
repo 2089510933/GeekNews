@@ -1,9 +1,9 @@
 package com.dawson.geeknews.presenter.main;
 
 import com.dawson.geeknews.base.RxPresenter;
-import com.dawson.geeknews.base.main.WelcomeContract;
+import com.dawson.geeknews.base.contract.main.WelcomeContract;
 import com.dawson.geeknews.model.DataManager;
-import com.dawson.geeknews.model.WelcomeBean;
+import com.dawson.geeknews.model.base.WelcomeBean;
 import com.dawson.geeknews.util.RxUtil;
 
 import javax.inject.Inject;

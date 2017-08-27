@@ -17,6 +17,7 @@ public class ImplPreferencesHelper implements PreferencesHelper {
     private final SharedPreferences mSPrefs;//偏好设置
     private static final String SHAREDPREFERENCES_NAME = "my_sp";
     private static final boolean DEFAULT_VERSION_POINT = false;
+    private static final boolean DEFAULT_NO_IMAGE = false;//默认不加载图片？
     @Inject
     public ImplPreferencesHelper() {
         mSPrefs = App.getInstance().getSharedPreferences(SHAREDPREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -28,6 +29,11 @@ public class ImplPreferencesHelper implements PreferencesHelper {
     @Override
     public void setVersionPoint(boolean isFirst) {
         mSPrefs.edit().putBoolean(Constants.SP_VERSION_POINT, isFirst).apply();
+    }
+
+    @Override
+    public boolean getNoImageState() {
+        return mSPrefs.getBoolean(Constants.SP_NO_IMAGE, DEFAULT_NO_IMAGE);
     }
 
 }

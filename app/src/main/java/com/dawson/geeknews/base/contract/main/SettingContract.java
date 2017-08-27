@@ -1,4 +1,4 @@
-package com.dawson.geeknews.base.main;
+package com.dawson.geeknews.base.contract.main;
 
 import com.dawson.geeknews.base.BasePresenter;
 import com.dawson.geeknews.base.BaseView;

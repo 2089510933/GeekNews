@@ -2,7 +2,9 @@ package com.dawson.geeknews.di.module;
 
 import com.dawson.geeknews.di.qualifier.MyUrl;
 import com.dawson.geeknews.di.qualifier.ZhihuUrl;
+import com.dawson.geeknews.di.scope.WechatUrl;
 import com.dawson.geeknews.model.http.api.MyApis;
+import com.dawson.geeknews.model.http.api.WeChatApis;
 import com.dawson.geeknews.model.http.api.ZhihuApis;
 
 import java.util.concurrent.TimeUnit;
@@ -78,6 +80,18 @@ public class HttpModule {
     /**
      * =======================================================
      */
+    @Singleton
+    @Provides
+    WeChatApis provideWechatService(@WechatUrl Retrofit retrofit) {
+        return retrofit.create(WeChatApis.class);
+    }
+    @Singleton
+    @Provides
+    @WechatUrl
+    Retrofit provideWechatRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, WeChatApis.HOST);
+    }
+
     @Singleton
     @Provides
     MyApis provideMyService(@MyUrl Retrofit retrofit) {

@@ -1,6 +1,7 @@
 package com.dawson.geeknews.ui.main.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -17,7 +18,8 @@ import com.dawson.geeknews.R;
 import com.dawson.geeknews.app.App;
 import com.dawson.geeknews.app.Constants;
 import com.dawson.geeknews.base.BaseActivity;
-import com.dawson.geeknews.base.main.MainContract;
+import com.dawson.geeknews.base.contract.main.MainContract;
+import com.dawson.geeknews.component.UpdateService;
 import com.dawson.geeknews.presenter.main.MainPresenter;
 import com.dawson.geeknews.ui.gank.GankMainFragment;
 import com.dawson.geeknews.ui.gold.GoldMainFragment;
@@ -25,10 +27,11 @@ import com.dawson.geeknews.ui.main.fragment.AboutFragment;
 import com.dawson.geeknews.ui.main.fragment.LikeFragment;
 import com.dawson.geeknews.ui.main.fragment.SettingFragment;
 import com.dawson.geeknews.ui.vtex.VtexMainFragment;
-import com.dawson.geeknews.ui.wechat.WechatMainFragment;
+import com.dawson.geeknews.ui.wechat.fragment.WechatMainFragment;
 import com.dawson.geeknews.ui.zhuhu.ZhihuMainFragment;
 import com.dawson.geeknews.util.SystemUtil;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -107,7 +110,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 PackageManager pm = getPackageManager();
                 PackageInfo pi = pm.getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES);
                 String versionName = pi.versionName;//当前版本号
-               // mPresenter.checkVersion(versionName);//更新版本
+                //mPresenter.checkVersion(versionName);//更新版本
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
@@ -139,12 +142,17 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showUpdateDialog(String versionContent) {
-
-    }
-
-    @Override
-    public void startDownloadService() {
-
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setTitle("检测到新版本!");
+        builder.setMessage(versionContent);
+        builder.setNegativeButton("取消", null);
+        builder.setPositiveButton("马上更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                checkPermissions();//检查权限
+            }
+        });
+        builder.show();
     }
 
     @Override
@@ -228,5 +236,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return mAboutFragment;
         }
         return mZhihuFragment;
+    }
+    public void checkPermissions() {
+        //检查权限
+        mPresenter.checkPermissions(new RxPermissions(this));
+    }
+    @Override
+    public void startDownloadService() {
+        //启动下载服务
+        startService(new Intent(mContext, UpdateService.class));
     }
 }
