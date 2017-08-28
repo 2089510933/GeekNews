@@ -59,5 +59,10 @@ public class RetrofitHelper implements HttpHelper {
         return mWechatApiService.getWXHot(Constants.KEY_API, num, page);
     }
 
+    @Override
+    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWechatSearchListInfo(int num, int page, String word) {
+        return mWechatApiService.getWXHotSearch(Constants.KEY_API, num, page, word);
+    }
+
 
 }

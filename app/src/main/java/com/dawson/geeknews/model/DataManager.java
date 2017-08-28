@@ -65,5 +65,12 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWechatListInfo(int num, int page) {
         return mHttpHelper.fetchWechatListInfo(num,page);
+
     }
+
+    @Override
+    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWechatSearchListInfo(int num, int page, String word) {
+        return mHttpHelper.fetchWechatSearchListInfo(num,page,word);
+    }
+
 }

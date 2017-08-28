@@ -15,9 +15,10 @@ import retrofit2.http.Query;
 
 public interface MyApis {
 
-    //    String HOST = "http://api.fir.im/apps/latest/59a046b9ca87a81949000129?api_token=1b4fa24326017c903c9faa50dc00ef9d/";
+    //String HOST = "http://api.fir.im/apps/latest/59a046b9ca87a81949000129?api_token=1b4fa24326017c903c9faa50dc00ef9d/";
     String HOST = "http://api.fir.im/apps/latest/";
-    String APK_DOWNLOAD_URL = "";
+//    String APK_DOWNLOAD_URL = "http://fir.im/nf8h";
+    String APK_DOWNLOAD_URL = "http://download.fir.im/v2/app/install/59a046b9ca87a81949000129?download_token=155c6b53c54f5cc353e777cbf3a64bd0&source=update";
 
     /**
      * 获取最新版本信息

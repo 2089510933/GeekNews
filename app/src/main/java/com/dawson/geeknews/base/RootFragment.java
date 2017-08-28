@@ -24,9 +24,10 @@ public abstract class RootFragment<T extends BasePresenter> extends BaseFragment
     private ProgressImageView ivLoading;
     private boolean isErrorViewAdded = false;
     private int mErrorResource = R.layout.view_error;
+
     @Override
     protected void initEventAndData() {
-        if (getView() == null)  return;
+        if (getView() == null) return;
         viewMain = (ViewGroup) getView().findViewById(R.id.view_main);
         if (viewMain == null) {
             throw new IllegalStateException(
@@ -36,15 +37,15 @@ public abstract class RootFragment<T extends BasePresenter> extends BaseFragment
             throw new IllegalStateException(
                     "view_main的ParentView应该是ViewGroup。");
         }
+        mParent = (ViewGroup) viewMain.getParent();
         /**
          * 预设一个加载进度布局视图
          */
-        mParent = (ViewGroup) viewMain.getParent();
         View.inflate(mContext, R.layout.view_progress, mParent);//获取等待加载的布局文件
         viewLoading = mParent.findViewById(R.id.view_loading);
         ivLoading = (ProgressImageView) viewLoading.findViewById(R.id.iv_progress);
-        viewLoading.setVisibility(View.GONE);//显示加载进度
-        viewMain.setVisibility(View.VISIBLE);//关闭内容视图
+        viewLoading.setVisibility(View.GONE);//不可见不保留
+        viewMain.setVisibility(View.VISIBLE);//可见
     }
 
     @Override
@@ -62,22 +63,32 @@ public abstract class RootFragment<T extends BasePresenter> extends BaseFragment
         }
         hideCurrentView();
         currentState = STATE_ERROR;
-        viewError.setVisibility(View.VISIBLE);
+        viewError.setVisibility(View.VISIBLE);//可见
     }
+
     @Override
     public void stateLoading() {
-        if (currentState == STATE_LOADING)
-            return;
+        //当前的状态
+        if (currentState == STATE_LOADING) return;
         hideCurrentView();
         currentState = STATE_LOADING;
         viewLoading.setVisibility(View.VISIBLE);
         ivLoading.start();
     }
+    @Override
+    public void stateMain() {
+        if (currentState == STATE_MAIN)
+            return;
+        hideCurrentView();
+        currentState = STATE_MAIN;
+        viewMain.setVisibility(View.VISIBLE);
+    }
 
+    //因此当前视图
     private void hideCurrentView() {
         switch (currentState) {
             case STATE_MAIN:
-                viewMain.setVisibility(View.GONE);
+                viewMain.setVisibility(View.GONE);//不显示
                 break;
             case STATE_LOADING:
                 ivLoading.stop();

@@ -70,6 +70,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     protected void initInject() {
         getActivityComponent().inject(this);
     }
+
     @Override
     protected int getLayout() {
         return R.layout.activity_main;
@@ -237,13 +238,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         }
         return mZhihuFragment;
     }
+
     public void checkPermissions() {
         //检查权限
         mPresenter.checkPermissions(new RxPermissions(this));
     }
+
     @Override
     public void startDownloadService() {
+        Intent intent = new Intent(mContext, UpdateService.class);
+        intent.putExtra("url","");
+        intent.putExtra("name","");
         //启动下载服务
-        startService(new Intent(mContext, UpdateService.class));
+        startService(intent);
     }
 }

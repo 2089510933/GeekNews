@@ -18,7 +18,12 @@ import retrofit2.Call;
 public interface HttpHelper {
 
     Flowable<WelcomeBean> fetchWelcomeInfo(String res);
+
     Flowable<VersionFir> fetchFirVersionInfo(String api_token);
+
     Call<VersionFir> fetchFirVersionInfoCall(String api_token);
+
     Flowable<WXHttpResponse<List<WXItemBean>>> fetchWechatListInfo(int num, int page);
+
+    Flowable<WXHttpResponse<List<WXItemBean>>> fetchWechatSearchListInfo(int num, int page, String word);
 }
